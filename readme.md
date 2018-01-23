@@ -86,4 +86,4 @@ Some things that could still be improved are:
 Despite that I think the code is in good enough shape to ship out to you. Hope you enjoy it, I certainly had fun making it.
 
 # Things I Would Change
-I would rather have taken a more TDD approach then I did, as it is the design
+I would rather have taken a more TDD approach then I did, as it is the design is a bit fragile when it comes to the `Instructions` class.
