@@ -8,8 +8,8 @@ import rover.RichRovers._
 
 import scala.util.Try
 
-object Process {
-  def apply[Input, Output](inputs: Seq[Input])
+class Process[Input, Output] {
+  def apply(inputs: Seq[Input])
                           (implicit plateauReader: PlateauReader[Input],
                            roverReader: RoverReader[Input],
                            instructionReader: InstructionReader[Input],
