@@ -1,4 +1,4 @@
-package input.basic
+package context
 
 import movement.instruction.Instruction.Instruction
 import movement.instruction.InstructionReader
@@ -7,12 +7,12 @@ import world.plateau.{Plateau, PlateauReader}
 
 import scala.util.{Failure, Success, Try}
 
-private [basic] object InputHandlers {
+private [context] object InputHandlers {
   object Plateaus {
     def apply[T](inputs: Seq[T])(implicit plateauReader: PlateauReader[T]): Try[Plateau] =
       inputs.headOption map plateauReader.apply getOrElse Failure(new RuntimeException("missing plateau input"))
   }
-  
+
   object Rovers {
     def apply[T](inputs: Seq[T])(implicit roverReader: RoverReader[T]): Try[Seq[Rover]] = Try {
       if(inputs.tail.isEmpty) {
@@ -28,7 +28,7 @@ private [basic] object InputHandlers {
       }
     }
   }
-  
+
   object Instructions {
     def apply[T](inputs: Seq[T])(implicit instructionReader: InstructionReader[T]):
     Try[Seq[Instruction]] = Try {
@@ -37,10 +37,10 @@ private [basic] object InputHandlers {
       }
     } transform(Success(_), _ => Failure(new RuntimeException("missing instructions")))
   }
-  
+
   private def takeOneOfTwos[T](whichPair: Seq[T] => T)(values: Seq[T]): Seq[T] =
     values.grouped(2).map(whichPair).toVector
   private def takeFirsts[T] = takeOneOfTwos[T](_.head)(_)
   private def takeSeconds[T] = takeOneOfTwos[T](_.last)(_)
-  
+
 }

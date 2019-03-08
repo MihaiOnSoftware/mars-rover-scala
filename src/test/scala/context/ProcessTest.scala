@@ -1,4 +1,4 @@
-package input.basic
+package context
 
 import org.scalatest.FlatSpec
 import rover.RoverReader._

@@ -1,6 +1,6 @@
-package input.basic
+package context
 
-import InputHandlers.{Instructions, Plateaus, Rovers}
+import context.InputHandlers.{Instructions, Plateaus, Rovers}
 import movement.instruction.Instruction.Instruction
 import movement.instruction.InstructionReader
 import movement.orientation.Orientation
