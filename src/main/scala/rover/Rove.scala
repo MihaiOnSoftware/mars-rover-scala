@@ -1,29 +1,32 @@
 package rover
 
 import movement.instruction.Instruction.Instruction
+import movement.instruction.{Context, InstructedRovers}
 import world.plateau.Plateau
 
 import scala.annotation.tailrec
 
 class Rove(plateau: Plateau) {
-  val using: Seq[(Rover,Instruction)] => Seq[Rover] = { instructedRovers =>
-    val rovers = instructedRovers.map(_._1)
-    val instruction = instructedRovers.map(_._2)
-    runRovers(rovers, Seq(), instruction)
+  val using: InstructedRovers => Seq[Rover] = { instructedRovers =>
+    val rovers = instructedRovers.rovers
+    val instructions = instructedRovers.instructions
+    val context = Context(plateau, rovers)
+    runRovers(instructions, context)
   }
   
   @tailrec
-  private def runRovers(unmoved: Seq[Rover], moved: Seq[Rover], instructions: Seq[Instruction]): Seq[Rover] = {
-    if(unmoved.isEmpty) moved
+  private def runRovers(instructions: Seq[Instruction],
+                        context: Context): Seq[Rover] = {
+    if(instructions.isEmpty) context.rovers
     else runRovers(
-      unmoved.tail,
-      moved :+ runRover(unmoved.head, instructions.head, unmoved.tail ++ moved),
-      instructions.tail
+      instructions.tail,
+      runRover(instructions.head, context)
     )
   }
   
-  private def runRover(rover: Rover, instruction: Instruction, otherRovers: Seq[Rover]) = {
-    instruction(plateau)(otherRovers)(rover)
+  private def runRover(instruction: Instruction, context: Context): Context = {
+    val (remainingContext, rover) = context.pop
+    remainingContext + instruction(remainingContext)(rover)
   }
 }
 

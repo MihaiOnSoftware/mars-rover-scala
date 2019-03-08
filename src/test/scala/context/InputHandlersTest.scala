@@ -1,6 +1,6 @@
-package input.basic
+package context
 
-import InputHandlers.{Instructions, Plateaus, Rovers}
+import context.InputHandlers.{Instructions, Plateaus, Rovers}
 import movement.instruction.Instruction.Instruction
 import movement.instruction.InstructionReader
 import movement.orientation.Orientation
@@ -57,7 +57,7 @@ class InputHandlersTest extends FlatSpec {
     override def apply(actions: Any): Try[Instruction] = Success(actions.asInstanceOf[Instruction])
   }
   
-  val testInstruction: Instruction = _ => _ => identity
+  val testInstruction: Instruction = _ => identity
   
   "instruction builder" should "apply the instruction reader to every odd input but not the first" in {
     assert(
