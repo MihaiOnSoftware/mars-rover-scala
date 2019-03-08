@@ -15,7 +15,7 @@ object InstructionReader {
     override def apply(instructions: String): Try[Instruction] = Try {
       instructions.tail.foldLeft[Instruction](instructionMap(instructions.head)) { (instruction, char) =>
         val newInstruction = instructionMap(char)
-        plateau => rovers => instruction(plateau)(rovers) andThen newInstruction(plateau)(rovers)
+        context => instruction(context) andThen newInstruction(context)
       }
     } transform(Success(_), _ => Failure(new RuntimeException("malformed instructions")))
     

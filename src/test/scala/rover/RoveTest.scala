@@ -1,6 +1,6 @@
 package rover
 
-import movement.instruction.Instruction
+import movement.instruction.{Context, Instruction}
 import movement.instruction.Instruction.Instruction
 import movement.orientation.Orientation
 import org.scalatest.FlatSpec
@@ -16,24 +16,30 @@ class RoveTest extends FlatSpec {
   val testRover1: Rover = Rover(Location(0, 0), Orientation.North)
   val testRover2: Rover = Rover(Location(3, 3), Orientation.East)
   val testPlateau: Plateau = Plateau(Location(3, 4))
+  val testContext: Context = Context(testPlateau, Seq())
+  def makeTestContext(rovers: Seq[Rover]): Context = Context(testPlateau, rovers)
   
   
   "Running the rovers" should "run the instructions of each rover on itself" in {
-    val testRovers = Seq(testRover1, testRover2)
-    assert(new Rove(testPlateau).using(testRovers zip testInstructions) === Seq(
-      testInstruction1(testPlateau)(Seq())(testRover1),
-      testInstruction2(testPlateau)(Seq())(testRover2)))
+    import rover.RichRovers._
+
+    val testRovers: Seq[Rover] = Seq(testRover1, testRover2)
+    assert(new Rove(testPlateau).using(testRovers following testInstructions) === Seq(
+      testInstruction1(testContext)(testRover1),
+      testInstruction2(testContext)(testRover2)))
   }
   
   val testRover3: Rover = Rover(Location(3, 2), Orientation.North)
   it should "pass the other rovers to the instructions" in {
-    val testRovers = Seq(testRover2, testRover3)
-    assert(new Rove(testPlateau).using(testRovers zip testInstructions) !== Seq(
-      testInstruction1(testPlateau)(Seq())(testRover2),
-      testInstruction2(testPlateau)(Seq())(testRover3)))
+    import rover.RichRovers._
+
+    val testRovers: Seq[Rover] = Seq(testRover2, testRover3)
+    assert(new Rove(testPlateau).using(testRovers following testInstructions) !== Seq(
+      testInstruction1(testContext)(testRover2),
+      testInstruction2(testContext)(testRover3)))
   
-    assert(new Rove(testPlateau).using(testRovers zip testInstructions) === Seq(
-      testInstruction1(testPlateau)(Seq(testRover3))(testRover2),
-      testInstruction2(testPlateau)(Seq(testRover2))(testRover3)))
+    assert(new Rove(testPlateau).using(testRovers following testInstructions) === Seq(
+      testInstruction1(makeTestContext(Seq(testRover3)))(testRover2),
+      testInstruction2(makeTestContext(Seq(testRover2)))(testRover3)))
   }
 }

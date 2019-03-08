@@ -10,7 +10,7 @@ import world.plateau.PlateauReader
 
 import scala.util.{Success, Try}
 
-class StringInputTest extends FlatSpec with Matchers {
+class StringInputTest extends FlatSpec {
 
   object FakeProcess extends Process[String, String] {
     override def apply(inputs: Seq[String])
@@ -30,6 +30,6 @@ class StringInputTest extends FlatSpec with Matchers {
 
     new StringInput(FakeProcess).process(inputStream, printStream)
 
-    outputStream.toString shouldBe (inputString + "\n")
+    assert(outputStream.toString === (inputString + "\n"))
   }
 }
