@@ -55,7 +55,9 @@ to run the app run "sbt run" in the project's root directory, note that the app 
 ## Assumptions Made
 
 Rovers cannot pass through other Rovers
+
 Rovers cannot escape the plateau
+
 Invalid input will return a short message why it's invalid and the program will terminate
 
 ## Thought Process
