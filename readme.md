@@ -1,6 +1,6 @@
 [![CircleCI](https://img.shields.io/circleci/project/github/MihaiOnSoftware/mars-rover-scala.svg?style=flat-square)](https://circleci.com/gh/MihaiOnSoftware/mars-rover-scala)
 [![codecov](https://img.shields.io/codecov/c/github/MihaiOnSoftware/mars-rover-scala.svg?style=flat-square)](https://codecov.io/gh/MihaiOnSoftware/mars-rover-scala)
-[![Scala Versions](https://img.shields.io/badge/scala-2.12.3-blue.svg?style=flat-square)]
+[![Scala Versions](https://img.shields.io/badge/scala-2.12.3-blue.svg?style=flat-square)](https://github.com/MihaiOnSoftware/mars-rover-scala/blob/master/build.sbt#L5)
 
 # Purpose
 Solution to the Mars Rover problem as part of an interview process. Written in Scala.
