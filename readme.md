@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/MihaiOnSoftware/mars-rover-scala/branch/master/graph/badge.svg)](https://codecov.io/gh/MihaiOnSoftware/mars-rover-scala)
+
 # Purpose
 Solution to the Mars Rover problem as part of an interview process. Written in Scala.
 
