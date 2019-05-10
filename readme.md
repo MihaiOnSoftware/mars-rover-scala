@@ -3,7 +3,12 @@
 [![Scala Versions](https://img.shields.io/badge/scala-2.12.3-blue.svg?style=flat-square)](https://github.com/MihaiOnSoftware/mars-rover-scala/blob/master/build.sbt#L5)
 
 # Purpose
-Solution to the Mars Rover problem as part of an interview process. Written in Scala.
+Once upon a time, this was a solution to the Mars Rover problem as part of an interview process.
+
+Now it's a test-bed for different architectures, libraries, etc.
+As well as a place where I can practice adding new features to an existing system.
+
+Maybe I'll eventually make this into a web based game too.
 
 # Description of the problem
 
